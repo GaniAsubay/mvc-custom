@@ -22,7 +22,8 @@ abstract class QueryBuilder extends DB
     /**
      * reset properties after execute
      */
-    public function resetProperties() {
+    public function resetProperties()
+    {
         $this->condition = null;
         $this->limit = null;
         $this->orderBy = null;
@@ -158,6 +159,7 @@ abstract class QueryBuilder extends DB
     public function setParams($params = [])
     {
         foreach ($params as $key => $param) {
+            if (is_array($param)) continue;
             $params[$key] = strip_tags($param);
         }
         $this->params = $params;

@@ -39,11 +39,11 @@ class TaskRepository
     public function getPerformedTasks() : array
     {
         return $this->model
-            ->where('status = :status')
+            ->where('status in (?,?)')
             ->pagination($this->getPage())
             ->orderBy("{$this->getSortField()} {$this->getSortType()}")
             ->limit($this->limit)
-            ->setParams(['status' => true])
+            ->setParams([Task::STATUS_EDITED_ADMIN, Task::STATUS_PERFORMED])
             ->get();
     }
 

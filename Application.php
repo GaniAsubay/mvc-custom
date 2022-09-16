@@ -14,7 +14,7 @@ class Application
 
     public static function isGuest() : bool
     {
-        if ($_SESSION['authorized']) {
+        if (!empty($_SESSION['authorized']) && $_SESSION['authorized'] == true) {
             return false;
         }
         return true;

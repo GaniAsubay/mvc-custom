@@ -64,6 +64,11 @@ class TaskController extends BaseController
         $users = UserRepository::getAllBySelect();
         if ($this->isPost()) {
             $data = $_POST;
+            if (Application::isGuest()) {
+                $this->setFlash('Error: Not authorized', false);
+                $this->redirect('index');
+                return;
+            }
             TaskHelper::checkChangedDescription($data['description'], $task->description, $data);
             if ($this->service->update($data)) {
                 $this->redirect('index');
